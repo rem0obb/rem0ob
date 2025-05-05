@@ -1,0 +1,395 @@
+:root {
+    --pixel-primary: #5E81F7;
+    --pixel-dark: #1A1D2E;
+    --pixel-light: #F0F2F6;
+    --pixel-accent: #F7B955;
+    --pixel-border: #3A3F5A;
+    --pixel-shadow: #0E101C;
+    --discord: #5865F2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    background-color: var(--pixel-dark);
+    color: var(--pixel-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* === NAVBAR IMPROVED === */
+header {
+    padding: 15px 0;
+    background-color: var(--pixel-dark);
+    border-bottom: 4px solid var(--pixel-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 0 15px rgba(94, 129, 247, 0.3);
+    animation: header-glow 3s infinite alternate;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    /* Adicione sua logo aqui ou via HTML */
+}
+
+.logo {
+    font-size: 28px;
+    color: var(--pixel-primary);
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 var(--pixel-shadow);
+    transition: all 0.3s;
+}
+
+.logo:hover {
+    text-shadow: 0 0 10px var(--pixel-primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--pixel-light);
+    text-decoration: none;
+    font-size: 20px;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--pixel-accent);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--pixel-accent);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* === Resto do seu CSS permanece o mesmo === */
+/* 2.5D PARALLAX EFFECT */
+.parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background:
+        linear-gradient(45deg, var(--pixel-dark) 25%, transparent 25%) 0 0,
+        linear-gradient(-45deg, var(--pixel-dark) 25%, transparent 25%) 0 0;
+    background-size: 40px 40px;
+    opacity: 0.3;
+}
+
+/* PIXEL CURSOR */
+body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="0" y="0" width="16" height="16" fill="%23F7B955"/></svg>'), auto;
+}
+
+@keyframes header-glow {
+    0% {
+        box-shadow: 0 0 15px rgba(94, 129, 247, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 25px rgba(94, 129, 247, 0.6);
+    }
+}
+
+/* HERO SECTION WITH 2.5D DEPTH */
+.hero {
+    padding: 100px 0 120px;
+    text-align: center;
+    position: relative;
+    perspective: 1000px;
+}
+
+.hero-content {
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+    }
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: var(--pixel-primary);
+    text-shadow: 4px 4px 0 var(--pixel-shadow);
+    position: relative;
+    display: inline-block;
+}
+
+.hero h1::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+    color: var(--pixel-accent);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* PIXEL BUTTONS WITH PRESS EFFECT */
+.btn {
+    display: inline-block;
+    background-color: var(--pixel-primary);
+    color: white;
+    padding: 12px 24px;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+    text-decoration: none;
+    position: relative;
+    box-shadow: 5px 5px 0 var(--pixel-shadow);
+    transition: all 0.1s;
+    transform-style: preserve-3d;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--pixel-shadow);
+    top: 5px;
+    left: 5px;
+    z-index: -1;
+    transition: all 0.1s;
+}
+
+.btn:active {
+    transform: translate(5px, 5px);
+    box-shadow: 0 0 0 var(--pixel-shadow);
+}
+
+.btn:active::before {
+    top: 0;
+    left: 0;
+}
+
+/* TOPICS SECTION WITH PIXEL GRID */
+.topics {
+    padding: 80px 0;
+    position: relative;
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    perspective: 1000px;
+}
+
+.topic-card {
+    background-color: var(--pixel-dark);
+    border: 3px solid var(--pixel-border);
+    padding: 25px;
+    text-align: center;
+    position: relative;
+    box-shadow: 5px 5px 0 var(--pixel-shadow);
+    transition: all 0.3s;
+    transform-style: preserve-3d;
+}
+
+.topic-card:hover {
+    transform: translate(-5px, -5px) rotateY(10deg);
+    box-shadow: 10px 10px 0 var(--pixel-shadow);
+}
+
+/* DISCORD WIDGET WITH PIXEL BORDER */
+.discord-widget {
+    border: 4px solid var(--pixel-border);
+    box-shadow: 8px 8px 0 var(--pixel-shadow);
+    transition: all 0.3s;
+    transform-style: preserve-3d;
+}
+
+.discord-widget:hover {
+    transform: rotateZ(-2deg) rotateX(5deg);
+}
+
+/* FOOTER WITH SCANLINES */
+footer {
+    padding: 30px 0;
+    background-color: var(--pixel-shadow);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(to bottom,
+            transparent 95%,
+            rgba(94, 129, 247, 0.1) 95%);
+    background-size: 100% 4px;
+    animation: scanlines 4s linear infinite;
+}
+
+@keyframes scanlines {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .topic-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        display: block;
+        margin: 15px auto;
+    }
+}
+
+ /* COMMUNITY SECTION - LADO A LADO */
+ .community-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.community-text {
+    flex: 1;
+    padding: 20px;
+    background-color: rgba(26, 29, 46, 0.8);
+    border: 3px solid var(--pixel-border);
+    box-shadow: 5px 5px 0 var(--pixel-shadow);
+}
+
+.community-text h2 {
+    color: var(--pixel-primary);
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.community-text ul {
+    list-style-type: none;
+    margin: 20px 0;
+}
+
+.community-text li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.community-text li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--pixel-accent);
+}
+
+.discord-widget {
+    flex: 1;
+    min-width: 0; /* Fix para flexbox em alguns navegadores */
+}
+
+.btn-discord {
+    background-color: var(--discord);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .community-container {
+        flex-direction: column;
+    }
+    
+    .community-text, .discord-widget {
+        width: 100%;
+    }
+}
