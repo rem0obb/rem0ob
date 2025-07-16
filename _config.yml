@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/remoob"
+baseurl: ""
 url: "https://github.com/rem0obb"
 
 # THEME-SPECIFIC CONFIGURATION
