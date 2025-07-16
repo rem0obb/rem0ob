@@ -1,0 +1,54 @@
+---
+layout: default
+---
+<div class="home">
+    <style scoped>
+        {% assign image = site.header_feature_image | relative_url | split: '.' %}
+
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+        .banner-container {
+            width: 100%;
+            background-image: url('{{ image | join: '.' }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .banner-container h1 {
+            color: #d1485cff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        {% if site.header_feature_image_responsive %}
+        @media screen and (max-width: 768px) {
+            .banner-container {
+                background-image: url('{{ image[0] | append: '-medium.' | append: image[1] | default: image}}');
+                height: 300px;
+            }
+        }
+        @media screen and (max-width: 576px) {
+            .banner-container {
+                background-image: url('{{ image[0] | append: '-small.' | append: image[1] }}');
+                height: 250px;
+            }
+        }
+        {% endif %}
+    </style>
+
+    <div id="main" class="banner-container">
+        <h1>{{ site.header_text | default: "Change <code>header_text</code> in <code>_config.yml</code>" }}</h1>
+    </div>
+
+    {% capture _blog %}{% include blog/blog.liquid %}{% endcapture %}
+    {{ _blog | split: " " | join: " " }}
+</div>
