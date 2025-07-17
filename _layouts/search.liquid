@@ -2,23 +2,111 @@
 layout: page
 ---
 
-<!-- Html Elements for Search -->
-<input type="text" id="search-input" placeholder="Enter keywords..." class="search-bar" autofocus>
-<br>
-<br>
-<ul id="results-container"></ul>
+<style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+  .search-container {
+    font-family: 'Space Grotesk', sans-serif;
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+    color: #444; /* cor do texto normal igual home */
+  }
+
+  .search-bar {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  #results-container {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .search-title {
+    margin-bottom: 1.5rem; /* mais proporcional */
+  }
+
+  .search-title h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #222; /* cor título igual home */
+    line-height: 1.2;
+  }
+
+  /* Responsivo para o título */
+  @media (max-width: 768px) {
+    .search-title h3 {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-title h3 {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .search-title h3 {
+      font-size: 1rem;
+    }
+  }
+
+  .search-title a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+
+  .meta {
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+
+  .search-title p {
+    margin: 0.5rem 0 0 0;
+    color: #444; /* texto descrição igual home */
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 2rem 0;
+  }
+</style>
+
+<div class="search-container">
+  <!-- Html Elements for Search -->
+  <input type="text" id="search-input" placeholder="Enter keywords..." class="search-bar" autofocus>
+  <ul id="results-container"></ul>
+</div>
 
 <section>
-    <script type="text/javascript">
-        SimpleJekyllSearch({
-            searchInput: document.getElementById('search-input'),
-            resultsContainer: document.getElementById('results-container'),
-            json: '{{ "/assets/data/search.liquid" | relative_url }}',
-            searchResultTemplate: '<div class="search-title"><a href="{url}"><h3> {title}</h3></a><div class="meta">{date} <div class="right"><i class="fas fa-tag"></i> {tags}</div></div><p>{excerpt}</p></div><hr> ',
-            noResultsText: '{{ site.data.language.str_no_result_found | default: "No result found" }}',
-            limit: 10,
-            strategy: 'wildcard',
-            exclude: []
-        })
-    </script>
+  <script type="text/javascript">
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('results-container'),
+      json: '{{ "/assets/data/search.liquid" | relative_url }}',
+      searchResultTemplate:
+        '<div class="search-title">' +
+          '<a href="{url}"><h3>{title}</h3></a>' +
+          '<div class="meta">{date}<div class="right"><i class="fas fa-tag"></i> {tags}</div></div>' +
+          '<p>{excerpt}</p>' +
+        '</div><hr>',
+      noResultsText: '{{ site.data.language.str_no_result_found | default: "No result found" }}',
+      limit: 10,
+      strategy: 'wildcard',
+      exclude: []
+    })
+  </script>
 </section>
